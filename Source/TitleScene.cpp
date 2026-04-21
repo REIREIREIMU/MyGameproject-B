@@ -1,4 +1,6 @@
 #include "TitleScene.h"
+#include "Screen.h"
+#include "Config.h"
 #include <DxLib.h>
 
 TitleScene::TitleScene()
@@ -11,7 +13,7 @@ TitleScene::~TitleScene()
 
 void TitleScene::Update()
 {
-	if (CheckHitKey(KEY_INPUT_C)) {
+	if (CheckHitKey(KEY_INPUT_SPACE)) {
 		SceneManager::ChangeScene("CR_SELECT");
 	}
 	if (CheckHitKey(KEY_INPUT_ESCAPE)) {
@@ -19,9 +21,9 @@ void TitleScene::Update()
 	}
 }
 
-
 void TitleScene::Draw()
 {
-	DrawString(0, 0, "TITLE SCENE", GetColor(255,255,255));
-	DrawString(100, 400, "Push [C]Key To CR_Select", GetColor(255, 255, 255));
+	SetFontSize(20);
+	DrawString(  0,   0, "TITLE SCENE", Config::White);
+	DrawString(100, 400, "Push [SPACE]Key To CR_Select", Config::White);
 }

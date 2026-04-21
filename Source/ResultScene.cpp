@@ -18,6 +18,7 @@ void ResultScene::Update()
 
 void ResultScene::Draw()
 {
+	SetFontSize(20);
 	DrawString(0, 0, "RESULT SCENE", GetColor(255, 255, 255));
 	DrawString(100, 400, "Push [T]Key To Title", GetColor(255, 255, 255));
 }
