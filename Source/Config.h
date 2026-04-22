@@ -13,4 +13,13 @@ namespace Config {
     const int Green         = GetColor(  0, 255,   0);  // 緑
     const int Black         = GetColor(  0,   0,   0);	// 黒
     const int White         = GetColor(255, 255, 255);  // 白
+
+    // 入力クールタイム管理
+    static constexpr float Title_Wait_Time  = 1.0f;
+    static constexpr float Cr_Sel_Wait_Time = 1.0f;
+    static constexpr float St_Sel_Wait_Time = 1.0f;
+    static constexpr float Play_Wait_Time   = 1.0f;
+    static constexpr float Result_Wait_Time = 1.0f;
+
+    // 定数管理
 }

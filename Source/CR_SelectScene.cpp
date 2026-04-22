@@ -18,6 +18,8 @@ void CR_SelectScene::Update()
 
 void CR_SelectScene::Draw()
 {
+	SetBackgroundColor(0, 0, 0);		//背景カラー
+
 	SetFontSize(20);
 	DrawString(0, 0, "CR_SELECT SCENE", GetColor(255, 255, 255));
 	DrawString(100, 400, "Push [S]Key To ST_Select", GetColor(255, 255, 255));
