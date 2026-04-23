@@ -14,6 +14,8 @@ namespace Config {
     const int Black         = GetColor(  0,   0,   0);	// 黒
     const int White         = GetColor(255, 255, 255);  // 白
 
+    static int prevTime = GetNowCount();  // 前フレームの時間を記録
+
     // 入力クールタイム管理
     static constexpr float Title_Wait_Time  = 1.0f;
     static constexpr float Cr_Sel_Wait_Time = 1.0f;

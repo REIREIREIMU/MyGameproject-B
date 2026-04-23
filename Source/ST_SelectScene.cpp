@@ -18,7 +18,7 @@ void ST_SelectScene::Update()
 
 void ST_SelectScene::Draw()
 {
-	SetBackgroundColor(0, 0, 0);		//背景カラー
+	SetBackgroundColor( 0, 0, 0);		//背景カラー
 
 	SetFontSize(20);
 	DrawString(0, 0, "ST_SELECT SCENE", GetColor(255, 255, 255));

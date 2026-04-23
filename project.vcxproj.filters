@@ -59,6 +59,7 @@
     <ClCompile Include="Source\CR_SelectScene.cpp">
       <Filter>SceneManager\CR_SelectScene</Filter>
     </ClCompile>
+    <ClCompile Include="Source\Input.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -130,6 +131,7 @@
       <Filter>SceneManager\CR_SelectScene</Filter>
     </ClInclude>
     <ClInclude Include="Source\Config.h" />
+    <ClInclude Include="Source\Input.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">

@@ -12,11 +12,16 @@ TitleScene::~TitleScene()
 }
 
 void TitleScene::Update()
-{
+{	
+	// フレーム時間管理
+	int now = GetNowCount();
+	float delta = (now - Config::prevTime) / 1000.0f; // 経過秒数
+	Config::prevTime = now;
+	
 	// クールタイム更新
-	{
-		Wait_Time -= 0.01f;
-		if (Wait_Time < 0.00f) Wait_Time = 0.00f;
+	if (Wait_Time > 0.0f) {
+		Wait_Time -= delta;
+		if (Wait_Time < 0.0f) Wait_Time = 0.0f;
 	}
 
 	if (Wait_Time == 0.00f && CheckHitKey(KEY_INPUT_UP))
@@ -50,7 +55,7 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	SetBackgroundColor(0, 100, 125);		//背景カラー
+	SetBackgroundColor(0, 100, 125);		//背景カラー（水色）
 
 	SetFontSize(20);
 	DrawString(  0,   0, "TITLE SCENE", Config::White);
