@@ -1,6 +1,7 @@
 #include "TitleScene.h"
 #include "Screen.h"
 #include "Config.h"
+#include "Input.h"
 #include <DxLib.h>
 
 TitleScene::TitleScene()
@@ -13,6 +14,7 @@ TitleScene::~TitleScene()
 
 void TitleScene::Update()
 {	
+	// ============ わからなくなりそうだけど全共通 ==============
 	// フレーム時間管理
 	int now = GetNowCount();
 	float delta = (now - Config::prevTime) / 1000.0f; // 経過秒数
@@ -24,24 +26,38 @@ void TitleScene::Update()
 		if (Wait_Time < 0.0f) Wait_Time = 0.0f;
 	}
 
-	if (Wait_Time == 0.00f && CheckHitKey(KEY_INPUT_UP))
+	// 入力更新
+	Input::Update();
+	// =======================================================
+
+	if (Wait_Time == 0.0f)
 	{
-		Wait_Time += Config::Title_Wait_Time;	// クールタイム加算
-		Title_Select--;
-		if (Title_Select < Select_Content::Solo_Play) Title_Select = Select_Content::Exit;
-	}
-	else if (Wait_Time == 0.00f && CheckHitKey(KEY_INPUT_DOWN))
-	{
-		Wait_Time += Config::Title_Wait_Time;	// クールタイム加算
-		Title_Select++;
-		if (Title_Select > Select_Content::Exit) Title_Select = Select_Content::Solo_Play;
+		int axisY = Input::GetAxisY();
+
+		if (DX_INPUT_PAD1) {
+			if (axisY == Config::UP) { // 上
+				Wait_Time = Config::Title_Wait_Time; // クールタイム加算
+				Title_Select--;
+				if (Title_Select < Select_Content::Solo_Play)
+					Title_Select = Select_Content::Exit;
+			}
+			else if (axisY == Config::DOWN) { // 下
+				Wait_Time = Config::Title_Wait_Time; // クールタイム加算
+				Title_Select++;
+				if (Title_Select > Select_Content::Exit)
+					Title_Select = Select_Content::Solo_Play;
+			}
+		}
 	}
 
-	if (Title_Select == Select_Content::Multi_Play && CheckHitKey(KEY_INPUT_SPACE)) {
-		SceneManager::ChangeScene("CR_SELECT");
-	}
-	if (Title_Select == Select_Content::Exit && CheckHitKey(KEY_INPUT_SPACE)) {
-		SceneManager::Exit();
+	if (DX_INPUT_PAD1 && Input::Is_SPACE())
+	{
+		if (Title_Select == Select_Content::Multi_Play) {
+			SceneManager::ChangeScene("CR_SELECT");
+		}
+		else if (Title_Select == Select_Content::Exit) {
+			SceneManager::Exit();
+		}
 	}
 
 	// デバック用表示

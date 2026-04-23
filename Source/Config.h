@@ -24,4 +24,6 @@ namespace Config {
     static constexpr float Result_Wait_Time = 1.0f;
 
     // 定数管理
+    static const int  LEFT, UP = -1;   // 左&上
+    static const int RIGHT, DOWN = 1;  // 右&下
 }
