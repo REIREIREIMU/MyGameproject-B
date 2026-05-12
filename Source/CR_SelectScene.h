@@ -9,8 +9,8 @@ public:
 	void Update() override;
 	void Draw() override;
 private:
-	int  Character_Select_X = 0; // キャラクター選択変数
-	int  Character_Select_Y = 0; // キャラクター選択変数
+	int  Character_Select_X[2] = { 0,0 }; // キャラクター選択変数（X軸）※ [2]はプレイヤーの人数
+	int  Character_Select_Y[2] = { 0,0 }; // キャラクター選択変数（Y軸）※ [2]はプレイヤーの人数
 
 	enum Character_Content_X
 	{
@@ -25,8 +25,6 @@ private:
 		Character_Y3
 	};
 
-	bool Select_Player_1 = true;	// プレイヤー1のキャラを決定（false = 決まってない/true = 決定）※ここでtrueにしないと即決定になる
-	bool Select_Player_2 = true;	// プレイヤー2のキャラを決定（false = 決まってない/true = 決定）
-
-	float Wait_Time = 0.00f; // 入力クールタイム
+	bool Select_Player[2] = { true , false };	// プレイヤーのキャラを決定（false = 決まってない/true = 決定）※プレイヤー１は、ここでtrueにしないと即決定になる
+	float Wait_Time[2] = { 0.00f , 0.00f };		// 入力クールタイム
 };
