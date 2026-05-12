@@ -29,7 +29,7 @@ int Input::GetAxisX() {
     if (CheckHitKey(KEY_INPUT_LEFT)  || CheckHitKey(KEY_INPUT_A)) return Config::LEFT;
     if (CheckHitKey(KEY_INPUT_RIGHT) || CheckHitKey(KEY_INPUT_D)) return Config::RIGHT;
 
-    return 0;
+//    return 0;
 }
 
 int Input::GetAxisY()

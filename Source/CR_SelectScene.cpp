@@ -14,50 +14,96 @@ CR_SelectScene::~CR_SelectScene()
 
 void CR_SelectScene::Update()
 {	
-	// ============ ã‚ã‹ã‚‰ãªããªã‚Šãã†ã ã‘ã©å…¨å…±é€š ==============
-	// ãƒ•ãƒ¬ãƒ¼ãƒ æ™‚é–“ç®¡ç†
+	// ============ ‚í‚©‚ç‚È‚­‚È‚è‚»‚¤‚¾‚¯‚Ç‘S‹¤’Ê ==============
+	// ƒtƒŒ[ƒ€ŠÔŠÇ—
 	int now = GetNowCount();
-	float delta = (now - Config::prevTime) / 1000.0f; // çµŒéç§’æ•°
+	float delta = (now - Config::prevTime) / 1000.0f; // Œo‰ß•b”
 	Config::prevTime = now;
 
-	// ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ æ›´æ–°
+	// ƒN[ƒ‹ƒ^ƒCƒ€XV
 	if (Wait_Time > 0.0f) {
 		Wait_Time -= delta;
 		if (Wait_Time < 0.0f) Wait_Time = 0.0f;
 	}
 
-	// å…¥åŠ›æ›´æ–°
+	// “ü—ÍXV
 	Input::Update();
 	// =======================================================
 
-	if (Wait_Time == 0.0f)
-	{
-		int axisY = Input::GetAxisY();
+	int axisX = Input::GetAxisX();
+	int axisY = Input::GetAxisY();
 
-		if (DX_INPUT_PAD1) {
-			if (axisY == Config::UP) { // ä¸Š
-				Wait_Time = Config::Title_Wait_Time; // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ åŠ ç®—
-				Character_Select--;
-				if (Character_Select < Character_Content::Character_A)
-					Character_Select = Character_Content::Character_R;
+	if (Wait_Time == 0.0f && DX_INPUT_PAD1) {
+		// ƒLƒƒƒ‰‚ğ‘I‘ğ‚Ì‘€ì(ƒLƒƒƒ‰ƒNƒ^[‚ª‘I‚Î‚ê‚Ä‚¢‚È‚¢)
+		{
+			// ¶ˆÚ“®
+			if (Select_Player_1 == false && axisX == Config::LEFT) {
+				Wait_Time = Config::Cr_Sel_Wait_Time; // ƒN[ƒ‹ƒ^ƒCƒ€‰ÁZ
+				Character_Select_X--;
+				if (Character_Select_X < Character_Content_X::Character_X1) {
+					Character_Select_X = Character_Content_X::Character_X3;
+				}
 			}
-			else if (axisY == Config::DOWN) { // ä¸‹
-				Wait_Time = Config::Title_Wait_Time; // ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ åŠ ç®—
-				Character_Select++;
-				if (Character_Select > Character_Content::Character_R)
-					Character_Select = Character_Content::Character_A;
+			// ‰EˆÚ“®
+			else if (Select_Player_1 == false && axisX == Config::RIGHT) {
+				Wait_Time = Config::Cr_Sel_Wait_Time; // ƒN[ƒ‹ƒ^ƒCƒ€‰ÁZ
+				Character_Select_X++;
+				if (Character_Select_X > Character_Content_X::Character_X3)
+					Character_Select_X = Character_Content_X::Character_X1;
+			}
+			// ãˆÚ“®
+			else if (Select_Player_1 == false && axisY == Config::UP) {
+				Wait_Time = Config::Cr_Sel_Wait_Time; // ƒN[ƒ‹ƒ^ƒCƒ€‰ÁZ
+				Character_Select_Y--;
+				if (Character_Select_Y < Character_Content_Y::Character_Y1) {
+					Character_Select_Y = Character_Content_Y::Character_Y3;
+				}
+			}
+			// ‰ºˆÚ“®
+			else if (Select_Player_1 == false && axisY == Config::DOWN) {
+				Wait_Time = Config::Cr_Sel_Wait_Time; // ƒN[ƒ‹ƒ^ƒCƒ€‰ÁZ
+				Character_Select_Y++;
+				if (Character_Select_Y > Character_Content_Y::Character_Y3)
+					Character_Select_Y = Character_Content_Y::Character_Y1;
 			}
 		}
+		// ƒLƒƒƒ‰Œˆ’èˆ—
+		if (Select_Player_1 == false && Input::Is_SPACE())
+		{
+			Wait_Time = Config::Cr_Sel_Wait_Time; // ƒN[ƒ‹ƒ^ƒCƒ€‰ÁZ
+			Select_Player_1 = true;		// Œˆ’è
+		}
+		else if(Select_Player_1 == true && Input::Is_SPACE())
+		{
+			Wait_Time = Config::Cr_Sel_Wait_Time; // ƒN[ƒ‹ƒ^ƒCƒ€‰ÁZ
+			Select_Player_1 = false;	// Œˆ’è‰ğœ
+		}
+	}
+	
+	// “ñl‚ÌƒvƒŒƒCƒ„[‚ÌƒLƒƒƒ‰‚ªŒˆ‚Ü‚Á‚½‚çƒXƒe[ƒWƒZƒŒƒNƒg‚Éi‚Ş
+	if (Select_Player_1 == true && Select_Player_2 == true)
+	{
+		SceneManager::ChangeScene("ST_SELECT");
 	}
 
-	//if (CheckHitKey(KEY_INPUT_S)) {
-	//	SceneManager::ChangeScene("ST_SELECT");
-	//}
+	// ƒfƒoƒbƒN—p•\¦
+	{
+		SetFontSize(20);
+		DrawFormatString( 0, 20, Config::White, "C‘I‘ğ: %d, %d", Character_Select_X, Character_Select_Y);
+		DrawFormatString( 0, 40, Config::White, "“ü—ÍƒN[ƒ‹ƒ^ƒCƒ€:%-0.2f", Wait_Time);
+		//DrawFormatString( 0, 60, Config::White, "ƒLƒƒƒ‰Œˆ’è1:%d", Select_Player_1);
+		//DrawFormatString( 0, 80, Config::White, "ƒLƒƒƒ‰Œˆ’è2:%d", Select_Player_2);
+		if		(Select_Player_1 == true)	DrawFormatString(0, 60, Config::White, "ƒLƒƒƒ‰Œˆ’è1:true");
+		else if (Select_Player_1 == false)	DrawFormatString(0, 60, Config::White, "ƒLƒƒƒ‰Œˆ’è1:false");
+		if		(Select_Player_2 == true)	DrawFormatString(0, 80, Config::White, "ƒLƒƒƒ‰Œˆ’è2:true");
+		else if (Select_Player_2 == false)	DrawFormatString(0, 80, Config::White, "ƒLƒƒƒ‰Œˆ’è2:false");
+	}
+
 }
 
 void CR_SelectScene::Draw()
 {
-	SetBackgroundColor(255, 100, 100);		//èƒŒæ™¯ã‚«ãƒ©ãƒ¼ï¼ˆæ·¡ã„èµ¤ï¼‰
+	SetBackgroundColor(255, 100, 100);		//”wŒiƒJƒ‰[i’W‚¢Ôj
 
 	SetFontSize(20);
 	DrawString(0, 0, "CR_SELECT SCENE", GetColor(255, 255, 255));
