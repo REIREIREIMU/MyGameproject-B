@@ -156,6 +156,7 @@
     <ClInclude Include="Library\SceneManager.h" />
     <ClInclude Include="Library\Time.h" />
     <ClInclude Include="Source\BootScene.h" />
+    <ClInclude Include="Source\Character.h" />
     <ClInclude Include="Source\Config.h" />
     <ClInclude Include="Source\CR_SelectScene.h" />
     <ClInclude Include="Source\Input.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="Library\SceneManager.cpp" />
     <ClCompile Include="Library\Time.cpp" />
     <ClCompile Include="Source\BootScene.cpp" />
+    <ClCompile Include="Source\Character.cpp" />
     <ClCompile Include="Source\CR_SelectScene.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\PlayScene.cpp" />

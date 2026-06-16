@@ -60,6 +60,9 @@
       <Filter>SceneManager\CR_SelectScene</Filter>
     </ClCompile>
     <ClCompile Include="Source\Input.cpp" />
+    <ClCompile Include="Source\Character.cpp">
+      <Filter>SceneManager\PlayScene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Screen.h" />
@@ -132,6 +135,9 @@
     </ClInclude>
     <ClInclude Include="Source\Config.h" />
     <ClInclude Include="Source\Input.h" />
+    <ClInclude Include="Source\Character.h">
+      <Filter>SceneManager\PlayScene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Library">
