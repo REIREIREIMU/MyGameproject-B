@@ -19,7 +19,7 @@ private:
 	{
 		Solo_Play,  // ソロプレイ
 		Multi_Play, // マルチプレイ
-		Exit		// 退出
+		Exit        // 退出
 	};
 
 	float Wait_Time    = 0.00f; // 入力クールタイム

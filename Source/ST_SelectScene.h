@@ -9,6 +9,8 @@ public:
 	void Update() override;
 	void Draw() override;
 
+	void StageSelecting();
+
 private:
 	int  Stage_Select[2] = { 0,0 }; // キャラクター選択変数
 	enum Stage_Content_X
@@ -24,6 +26,17 @@ private:
 		Stage_Y3
 	};
 
-	bool  Select_Player = true;		// ステージの決定フラグ（false = 決まってない/true = 決定）※プレイヤー１は、ここでtrueにしないと即決定になる
-	float Wait_Time     = 0.00f;	// 入力クールタイム
+	// セレクトの状態
+	enum SelectState
+	{
+		Init_Wait,
+		Selecting,
+		Preparation_OK
+	};
+
+	SelectState state;
+
+	bool  Stage_Decision; // ステージの決定フラグ（false = 決まってない/true = 決定）※プレイヤー１は、ここでtrueにしないと即決定になる
+	float Wait_Time;      // 入力クールタイム
+	float Common_Wait;    // 最初の待機時間
 };

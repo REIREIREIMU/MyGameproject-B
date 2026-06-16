@@ -71,10 +71,10 @@ void TitleScene::Update()
 
 void TitleScene::Draw()
 {
-	SetBackgroundColor(0, 100, 125);		//背景カラー（水色）
+	SetBackgroundColor(0, 100, 125); //背景カラー（水色）
 
 	SetFontSize(20);
-	DrawString(  0,   0, "TITLE SCENE", Config::White);
+	DrawString( 0, 0, "TITLE SCENE", Config::White);
 
 	SetFontSize(100);
 	DrawString(250, 220, "タイトル(仮)", Config::White);
@@ -84,4 +84,19 @@ void TitleScene::Draw()
 	DrawString(Screen::WIDTH / 4, 400, "-coming soon-", Config::White);
 	DrawString(Screen::WIDTH / 4, 450, "二人で開始", Config::White);
 	DrawString(Screen::WIDTH / 4, 500, "終了", Config::White);
+
+	switch (Title_Select)
+	{
+	case Select_Content::Solo_Play:
+		DrawString(Screen::WIDTH / 4, 400, "-coming soon-", Config::Red);
+		break;
+	case Select_Content::Multi_Play:
+		DrawString(Screen::WIDTH / 4, 450, "二人で開始", Config::Red);
+		break;
+	case Select_Content::Exit:
+		DrawString(Screen::WIDTH / 4, 500, "終了", Config::Red);
+		break;
+	default:
+		break;
+	}
 }
