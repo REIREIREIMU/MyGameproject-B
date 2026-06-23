@@ -8,7 +8,10 @@ CR_SelectScene::CR_SelectScene() :
     state(Init_Wait),
     Common_Wait(5.0f),
     Wait_Time{ (0.0f),(0.0f) },
-    Select_Player{ (false),(false) }
+    Select_Player{ (false),(false) },
+    Character_Select_X{ Character_X1, Character_X3 },
+    Character_Select_Y{ Character_Y1, Character_Y1 },
+    Chara_id{ Chara_A, Chara_C }
 {
 }
 
@@ -108,7 +111,48 @@ void CR_SelectScene::CharacterSelecting()
                 if (Character_Select_Y[0] > Character_Content_Y::Character_Y3)
                     Character_Select_Y[0] = Character_Content_Y::Character_Y1;
             }
+
+            // キャラクターID取得状況
+            {
+                if (Character_Select_X[0] == Character_Content_X::Character_X1
+                    && Character_Select_Y[0] == Character_Content_Y::Character_Y1) {
+                    CR_SelectScene::Instance().Chara_id[0] = Character::Chara_A;
+                }
+                else if (Character_Select_X[0] == Character_Content_X::Character_X2
+                    && Character_Select_Y[0] == Character_Content_Y::Character_Y1) {
+                    CR_SelectScene::Instance().Chara_id[0] = Character::Chara_B;
+                }
+                else if (Character_Select_X[0] == Character_Content_X::Character_X3
+                    && Character_Select_Y[0] == Character_Content_Y::Character_Y1) {
+                    CR_SelectScene::Instance().Chara_id[0] = Character::Chara_C;
+                }
+                else if (Character_Select_X[0] == Character_Content_X::Character_X1
+                    && Character_Select_Y[0] == Character_Content_Y::Character_Y2) {
+                    CR_SelectScene::Instance().Chara_id[0] = Character::Chara_D;
+                }
+                else if (Character_Select_X[0] == Character_Content_X::Character_X2
+                    && Character_Select_Y[0] == Character_Content_Y::Character_Y2) {
+                    CR_SelectScene::Instance().Chara_id[0] = Character::Chara_E;
+                }
+                else if (Character_Select_X[0] == Character_Content_X::Character_X3
+                    && Character_Select_Y[0] == Character_Content_Y::Character_Y2) {
+                    CR_SelectScene::Instance().Chara_id[0] = Character::Chara_F;
+                }
+                else if (Character_Select_X[0] == Character_Content_X::Character_X1
+                    && Character_Select_Y[0] == Character_Content_Y::Character_Y3) {
+                    CR_SelectScene::Instance().Chara_id[0] = Character::Chara_G;
+                }
+                else if (Character_Select_X[0] == Character_Content_X::Character_X2
+                    && Character_Select_Y[0] == Character_Content_Y::Character_Y3) {
+                    CR_SelectScene::Instance().Chara_id[0] = Character::Chara_H;
+                }
+                else if (Character_Select_X[0] == Character_Content_X::Character_X3
+                    && Character_Select_Y[0] == Character_Content_Y::Character_Y3) {
+                    CR_SelectScene::Instance().Chara_id[0] = Character::Chara_I;
+                }
+            }
         }
+
         // キャラ決定処理
         if (Wait_Time[0] == 0.0f && Select_Player[0] == false && Input::Is_SPACE())
         {
@@ -204,7 +248,49 @@ void CR_SelectScene::CharacterSelecting()
                 if (Character_Select_Y[1] > Character_Content_Y::Character_Y3)
                     Character_Select_Y[1] = Character_Content_Y::Character_Y1;
             }
+
+            // キャラクターID取得状況
+            {
+                if (Character_Select_X[1] == Character_Content_X::Character_X1
+                    && Character_Select_Y[1] == Character_Content_Y::Character_Y1) {
+                    CR_SelectScene::Instance().Chara_id[1] = Character::Chara_A;
+                }
+                else if (Character_Select_X[1] == Character_Content_X::Character_X2
+                    && Character_Select_Y[1] == Character_Content_Y::Character_Y1) {
+                    CR_SelectScene::Instance().Chara_id[1] = Character::Chara_B;
+                }
+                else if (Character_Select_X[1] == Character_Content_X::Character_X3
+                    && Character_Select_Y[1] == Character_Content_Y::Character_Y1) {
+                    CR_SelectScene::Instance().Chara_id[1] = Character::Chara_C;
+                }
+                else if (Character_Select_X[1] == Character_Content_X::Character_X1
+                    && Character_Select_Y[1] == Character_Content_Y::Character_Y2) {
+                    CR_SelectScene::Instance().Chara_id[1] = Character::Chara_D;
+                }
+                else if (Character_Select_X[1] == Character_Content_X::Character_X2
+                    && Character_Select_Y[1] == Character_Content_Y::Character_Y2) {
+                    CR_SelectScene::Instance().Chara_id[1]= Character::Chara_E;
+                }
+                else if (Character_Select_X[1] == Character_Content_X::Character_X3
+                    && Character_Select_Y[1] == Character_Content_Y::Character_Y2) {
+                    CR_SelectScene::Instance().Chara_id[1] = Character::Chara_F;
+                }
+                else if (Character_Select_X[1] == Character_Content_X::Character_X1
+                    && Character_Select_Y[1] == Character_Content_Y::Character_Y3) {
+                    CR_SelectScene::Instance().Chara_id[1] = Character::Chara_G;
+                }
+                else if (Character_Select_X[1] == Character_Content_X::Character_X2
+                    && Character_Select_Y[1] == Character_Content_Y::Character_Y3) {
+                    CR_SelectScene::Instance().Chara_id[1] = Character::Chara_H;
+                }
+                else if (Character_Select_X[1] == Character_Content_X::Character_X3
+                    && Character_Select_Y[1] == Character_Content_Y::Character_Y3) {
+                    CR_SelectScene::Instance().Chara_id[1] = Character::Chara_I;
+                }
+            }
+
         }
+
         // キャラ決定処理
         if (Wait_Time[1] == 0.0f && Select_Player[1] == false && CheckHitKey(KEY_INPUT_RETURN))
         {
@@ -242,6 +328,7 @@ void CR_SelectScene::Draw()
             DrawFormatString(0, 40, Config::White, "1P_入力クールタイム:%-0.2f", Wait_Time[0]);
             if (Select_Player[0] == true)  DrawFormatString(0, 60, Config::White, "1P_キャラ決定:true");
             else if (Select_Player[0] == false) DrawFormatString(0, 60, Config::White, "1P_キャラ決定:false");
+            DrawFormatString(0, 80, Config::White, "1P選択キャラID:%d", CR_SelectScene::Instance().Chara_id[0]);
         }
         // 2P
         {
@@ -249,6 +336,7 @@ void CR_SelectScene::Draw()
             DrawFormatString(400, 40, Config::White, "2P_入力クールタイム:%-0.2f", Wait_Time[1]);
             if (Select_Player[1] == true)  DrawFormatString(400, 60, Config::White, "2P_キャラ決定:true");
             else if (Select_Player[1] == false) DrawFormatString(400, 60, Config::White, "2P_キャラ決定:false");
+            DrawFormatString(400, 80, Config::White, "2P選択キャラID:%d", CR_SelectScene::Instance().Chara_id[1]);
         }
     }
 

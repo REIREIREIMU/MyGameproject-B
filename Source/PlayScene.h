@@ -1,5 +1,8 @@
 #pragma once
 #include "../Library/SceneBase.h"
+#include <vector>
+
+class Character;
 
 class PlayScene : public SceneBase
 {
@@ -11,4 +14,8 @@ public:
 
 private:
     static const int Ground = 600; //ステージの地面
+
+    // ======= ポインター群 =======
+    Character* character = nullptr;     // Characterのポインタを作成
+
 };

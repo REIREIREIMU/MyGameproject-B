@@ -1,5 +1,6 @@
 #pragma once
 #include "../Library/SceneBase.h"
+#include <vector>
 
 class CR_SelectScene : public SceneBase
 {
@@ -9,11 +10,33 @@ public:
     void Update() override;
     void Draw() override;
 
+    // キャラクターを選択する処理
     void CharacterSelecting();
 
+    // キャラクターIDを別のシーンに引き渡す
+    static CR_SelectScene& Instance()
+    {
+        static CR_SelectScene instance;
+        return instance;
+    }
+
+    int   Chara_id[2];     // キャラクターID
+    enum Character         // キャラクター種類
+    {
+        Chara_A,
+        Chara_B,
+        Chara_C,
+        Chara_D,
+        Chara_E,
+        Chara_F,
+        Chara_G,
+        Chara_H,
+        Chara_I
+    };
+
 private:
-    int  Character_Select_X[2] = { 0,0 }; // キャラクター選択変数（X軸）※ [2]はプレイヤーの人数
-    int  Character_Select_Y[2] = { 0,0 }; // キャラクター選択変数（Y軸）※ [2]はプレイヤーの人数
+    int  Character_Select_X[2]; // キャラクター選択変数（X軸）※ [2]はプレイヤーの人数
+    int  Character_Select_Y[2]; // キャラクター選択変数（Y軸）※ [2]はプレイヤーの人数
 
     // キャラ選択X軸
     enum Character_Content_X
@@ -28,20 +51,6 @@ private:
         Character_Y1,
         Character_Y2,
         Character_Y3
-    };
-
-    // キャラクター種類
-    enum Character
-    {
-        Chara_A,
-        Chara_B,
-        Chara_C,
-        Chara_D,
-        Chara_E,
-        Chara_F,
-        Chara_G,
-        Chara_H,
-        Chara_I
     };
 
     // セレクトの状態

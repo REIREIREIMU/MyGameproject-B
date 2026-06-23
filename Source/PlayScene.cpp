@@ -2,11 +2,11 @@
 #include "Screen.h"
 #include "Config.h"
 #include <DxLib.h>
-
 #include "Character.h"
 
 PlayScene::PlayScene()
 {
+    character = new Character();
 }
 
 PlayScene::~PlayScene()
@@ -15,6 +15,8 @@ PlayScene::~PlayScene()
 
 void PlayScene::Update()
 {
+    character->Update();
+
     if (CheckHitKey(KEY_INPUT_R)) {
         SceneManager::ChangeScene("RESULT");
     }
@@ -22,7 +24,9 @@ void PlayScene::Update()
 
 void PlayScene::Draw()
 {
-    SetBackgroundColor(0, 0, 0);		//背景カラー
+    SetBackgroundColor(0, 0, 0);    // 背景カラー
+
+    character->Draw();
 
     SetFontSize(20);
     DrawString(0, 0, "PLAY SCENE", GetColor(255, 255, 255));
@@ -33,4 +37,5 @@ void PlayScene::Draw()
         // 地面の判定
         DrawLine(0, Ground, Screen::WIDTH, Ground, Config::Red);
     }
+
 }
